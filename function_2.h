@@ -1,3 +1,5 @@
+#ifndef FUNCTION_2_H
+#define FUNCTION_2_H
 #include <iostream>
 #include <vector>
 #include <set>
@@ -8,7 +10,8 @@
 
 using namespace std;
 
-void function_2(set<char> vars, vector<string> pros, bool PoS)
+
+map<char, vector<int>> function_2(set<char> vars, vector<string> pros, bool PoS)
 {
     int n = vars.size();
     int size = 2 << n - 1;
@@ -157,4 +160,8 @@ void function_2(set<char> vars, vector<string> pros, bool PoS)
     }
     cout << "\n\n\n";
 
+    return table;
+
 }
+
+#endif
