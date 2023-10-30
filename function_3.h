@@ -10,31 +10,6 @@
 
 using namespace std;
 
-bool comparing_bits(string str1, string str2)
-{
-    vector<int> index1, index2;
-
-    for (int i = 0; i < str1.length(); i++)
-    {
-        if(str1[i] == '1')
-            index1.push_back(i);
-    }
-
-    for (int i = 0; i < str2.length(); i++)
-    {
-        if(str2[i] == '1')
-            index2.push_back(i);
-    }
-    
-    for (int i = 0; i < index1.size(); i++)
-    {
-        if(index1[i] != index2[i])
-        return false;
-    }
-        return true;
-
-
-}
 
 void function_3(map<char, vector<int>> table, set<char> vars)
 {
