@@ -10,7 +10,7 @@
 
 using namespace std;
 
-//test
+
 map<char, vector<int>> function_2(set<char> vars, vector<string> pros, bool PoS)
 {
     int n = vars.size();
