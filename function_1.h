@@ -1,5 +1,5 @@
-// so far my function validates
-// alters the ''
+#ifndef FUNCTION_1_H
+#define FUNCTION_1_H
 
 #include <iostream>
 #include <vector>
@@ -158,3 +158,4 @@ bool validate(string &user_input, bool &pos)
 
     return true;
 }
+#endif
