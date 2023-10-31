@@ -10,11 +10,22 @@
 
 using namespace std;
 
+bool compare_terms(string x, string y)
+{
+    for (int i = 0; i < x.size(); i++)
+    {
+        if (x[i] != y[i] && x[i] != '-')
+            return false;
+    }
+    return true;
+}
 
 void function_3(map<char, vector<int>> table, set<char> vars)
 {
+    vector<vector<int>> minterms;
+    vector<int> old_minterms;
     vector<string> pis;
-    set<string> remove1, remove2;
+    set<string> remover;
     int size = table['X'].size();
     vector<string> terms;
 
@@ -29,8 +40,11 @@ void function_3(map<char, vector<int>> table, set<char> vars)
                 temp += to_string(iter->second[i]);
                 iter++;
             }
-        if(temp != "")
+        if (temp != "")
+        {
             terms.push_back(temp);
+            old_minterms.push_back(i);
+        }
     }
 
     vector<set<string>> sets(vars.size() + 1);
@@ -38,9 +52,9 @@ void function_3(map<char, vector<int>> table, set<char> vars)
     for (int i = 0; i < size; i++)
     {
         int count = 0;
-        for(int j = 0; j < terms[i].length(); j++)
+        for (int j = 0; j < terms[i].length(); j++)
         {
-            if(terms[i][j] == '1')
+            if (terms[i][j] == '1')
                 count++;
         }
         sets[count].insert(terms[i]);
@@ -49,7 +63,7 @@ void function_3(map<char, vector<int>> table, set<char> vars)
     size = sets.size() - 1;
     for (int i = 0; i < sets.size() - 2; i++)
     {
-        if(sets[i].size() > 0)
+        if (sets[i].size() > 0)
         {
             sets.push_back(set<string>());
             size++;
@@ -57,17 +71,17 @@ void function_3(map<char, vector<int>> table, set<char> vars)
         for (set<string>::iterator j = sets[i].begin(); j != sets[i].end(); j++)
         {
             bool flag;
-            for (set<string>::iterator k = sets[i+1].begin(); k != sets[i+1].end(); k++)
+            for (set<string>::iterator k = sets[i + 1].begin(); k != sets[i + 1].end(); k++)
             {
                 flag = false;
                 int count = 0;
                 int index;
                 for (int z = 0; z < (*k).length(); z++)
-                    if((*k)[z] != (*j)[z])
-                    {   
+                    if ((*k)[z] != (*j)[z])
+                    {
                         flag = true;
                         index = z;
-                        if(count++==1)
+                        if (count++ == 1)
                         {
                             flag = false;
                             break;
@@ -78,64 +92,67 @@ void function_3(map<char, vector<int>> table, set<char> vars)
                     string temp = *k;
                     temp[index] = '-';
                     sets[size].insert(temp);
-                    remove1.insert(*k);
+                    remover.insert(*k);
+                    remover.insert(*j);
                 }
-            }
-            if (flag)
-            {
-                remove2.insert(*j);
             }
         }
     }
 
+    for (vector<set<string>>::iterator iter = sets.begin(); iter != sets.end();)
+        if (iter->empty())
+            iter = sets.erase(iter);
+        else
+            ++iter;
 
-
-    
     for (int i = 0; i < sets.size(); i++)
     {
-        for (set<string>::iterator iter1 = sets[i].begin(); iter1 != sets[i].end(); iter1++)
+        for (set<string>::iterator iter = sets[i].begin(); iter != sets[i].end();)
         {
-            bool flag = true;
-            for (set<string>::iterator iter2 = remove1.begin(); iter2 != remove1.end(); iter2++)
+            bool test = false;
+            for (set<string>::iterator ita = remover.begin(); ita != remover.end();)
             {
-                if (*iter1 == *iter2)
+                if (*ita == *iter)
                 {
-                    flag = false;
+                    ita = remover.erase(ita);
+                    test = true;
                     break;
                 }
-            }
-            for (set<string>::iterator iter2 = remove2.begin(); iter2 != remove2.end(); iter2++)
-            {
-                if (*iter1 == *iter2)
+                else
                 {
-                    flag = false;
-                    break;
+                    ita++;
                 }
             }
-
-            if (flag)
-                pis.push_back(*iter1);
+            if (test)
+                iter = sets[i].erase(iter);
+            else
+                iter++;
         }
     }
 
     for (int i = 0; i < sets.size(); i++)
         for (set<string>::iterator j = sets[i].begin(); j != sets[i].end(); j++)
-            cout << *j << "\n";
+        {
+            minterms.push_back(vector<int>());
+            pis.push_back(*j);
+        }
 
-    for (int i = 0; i < pis.size(); i++)
-        cout << pis[i] << '\n';
+    for (int i = 0; i < terms.size(); i++)
+    {
+        for (int j = 0; j < pis.size(); j++)
+        {
+            if (compare_terms(pis[j], terms[i]))
+                minterms[j].push_back(old_minterms[i]);
+        }
+    }
 
-    
-
-    
-    
-    
-    
-
-
-
+    for (int i = 0; i <pis.size(); i++)
+    {
+        cout << pis[i] << " : ";
+        for (int j = 0; j < minterms[i].size(); j++)
+            cout << minterms[i][j] << " ";
+        cout << '\n';
+    }
 }
-
-
 
 #endif
