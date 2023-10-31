@@ -1,0 +1,15 @@
+
+vector<string> pros;
+int n = boolexp.length();
+string temp("");
+for (int i = 0; i < n; i++)
+{
+
+    if (isalpha(boolexp[i]) || boolexp[i] == '\'')
+        temp += boolexp[i];
+    if (boolexp[i] == '+' || boolexp[i + 1] == '\0')
+    {
+        pros.push_back(temp);
+        temp = "";
+    }
+}
