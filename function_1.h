@@ -77,7 +77,7 @@ bool validate(string &user_input, bool &pos)
     user_input.erase(remove(user_input.begin(), user_input.end(), ' '), user_input.end());
     n = user_input.length();
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++ )
     {
         if (isalpha(user_input[i]))
         {
