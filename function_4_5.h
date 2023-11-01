@@ -101,7 +101,7 @@ void function_4_5(map<char , vector<int> > table, vector<string> PIs , vector< v
     }
     print(EPIs, notcoveredmins, variables);
 
-    map< string , vector <int> > CoverChart;
+    unordered_map< string , vector <int> > CoverChart;
     vector <string> temp;
     for(int i = 0 ; i < PIs.size() ; i++)
     {
