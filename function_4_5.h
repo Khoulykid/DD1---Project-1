@@ -100,5 +100,43 @@ void function_4_5(map<char , vector<int> > table, vector<string> PIs , vector< v
         
     }
     print(EPIs, notcoveredmins, variables);
+
+    map< string , vector <int> > CoverChart;
+    vector <string> temp;
+    for(int i = 0 ; i < PIs.size() ; i++)
+    {
+        vector <int> tempo (notcoveredmins.size() , 0) ;
+
+        bool nonepi (false);
+        for(int j = 0 ; j <EPIs.size(); j++)
+        {
+            if(PIs[i] != EPIs[j])
+                nonepi = true;
+            else 
+                nonepi = false;
+
+            
+            
+        }
+        
+        if(nonepi)
+        {   
+            temp.push_back(PIs[i]);            
+            
+            for(int k = 0; k < notcoveredmins.size(); k++)
+                for(int j = 0 ; j < minterms[i].size(); j++)
+                {
+                    if(minterms[i][j] == notcoveredmins[k])
+                    {
+                        tempo[k] = 1;
+                    }
+                        
+                    else if (!tempo[k])
+                        tempo[k] = 0;
+                }
+             CoverChart[PIs[i]] = tempo;
+        }
+        
+    }
 }
 #endif
