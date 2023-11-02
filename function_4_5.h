@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <iomanip>
 
+
 using namespace std;
 
 void print(vector<string> EPIs, vector<int> notcoveredmins, string variables)
@@ -101,22 +102,20 @@ void function_4_5(map<char , vector<int> > table, vector<string> PIs , vector< v
     }
     print(EPIs, notcoveredmins, variables);
 
-    unordered_map< string , vector <int> > CoverChart;
+    vector< pair < string , vector<int> > > CoverChart;
     vector <string> temp;
     for(int i = 0 ; i < PIs.size() ; i++)
     {
         vector <int> tempo (notcoveredmins.size() , 0) ;
 
-        bool nonepi (false);
+        bool nonepi (true);
         for(int j = 0 ; j <EPIs.size(); j++)
         {
-            if(PIs[i] != EPIs[j])
+            if(PIs[i] != EPIs[j] && nonepi) // checking if nonepi
                 nonepi = true;
             else 
                 nonepi = false;
 
-            
-            
         }
         
         if(nonepi)
@@ -134,9 +133,13 @@ void function_4_5(map<char , vector<int> > table, vector<string> PIs , vector< v
                     else if (!tempo[k])
                         tempo[k] = 0;
                 }
-             CoverChart[PIs[i]] = tempo;
+            
+            CoverChart.push_back(pair<string, vector<int> > (PIs[i],tempo));
+                
         }
         
     }
+
+    
 }
 #endif
