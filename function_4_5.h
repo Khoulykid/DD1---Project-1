@@ -115,7 +115,6 @@ void function_4_5(map<char , vector<int> > table, vector<string> PIs , vector< v
                 nonepi = true;
             else 
                 nonepi = false;
-
         }
         
         if(nonepi)
