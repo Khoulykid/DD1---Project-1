@@ -615,21 +615,21 @@ void function_4(map<char , vector<int> > table, vector<string> PIs , vector< vec
         
     }
 
-    f6(CoverChart, EPIs);
+    //f6(CoverChart, EPIs);
 
-    // cout << "COVERED CHART :\n" ;
+    cout << "COVERED CHART :\n" ;
 
 
-    // for( i = 0 ; i < CoverChart.size(); i++)
-    // {
-    //     cout << CoverChart[i].first <<" ";
-    //         for( int j = 0; j < CoverChart[i].second.size(); j++)
-    //         {
-    //             cout << CoverChart[i].second[j] << " ";
-    //         }
+    for( i = 0 ; i < CoverChart.size(); i++)
+    {
+        cout << CoverChart[i].first <<" ";
+            for( int j = 0; j < CoverChart[i].second.size(); j++)
+            {
+                cout << CoverChart[i].second[j] << " ";
+            }
 
-    //         cout << endl;
+            cout << endl;
 
-    // }
+    }
     //notcoveredmins, mintermsPIs, EPIs, variables;
 }
