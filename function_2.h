@@ -8,16 +8,13 @@
 #include <algorithm>
 #include <iomanip>
 
+
 using namespace std;
 
 
-map<char, vector<int>> function_2(set<char> vars, vector<string> pros, bool PoS)
+void Fill_Truth_table(map<char, vector<int>> &table, set<char> vars, int n, int size)    //Function to fill the Truth Table.
 {
-    int n = vars.size();    //Storing it in a varialbe instead of calling the function everytime.
-    int size = 2 << n - 1;  //Bit operation to get the number of rows in the truth table.
-    map<char, vector<int>> table;   //Creating a map(truth table) with Key index as the variables in the input
-                                    //and frequency as the vector of int that'll store the values (0,1) 
-
+    
     for (set<char>::iterator iter = vars.begin(); iter != vars.end(); iter++)
         table.insert(pair<char, vector<int>>(*iter, vector<int>(size)));    //Initializing the variables in the Map (Key)
 
@@ -34,12 +31,12 @@ map<char, vector<int>> function_2(set<char> vars, vector<string> pros, bool PoS)
         }
         iter--;
     }
-    
+}
 
-    
-    if (!PoS)   //checks whether it is PoS or not
-    {
-        for (int j = 0; j < pros.size(); j++)
+
+void SOP_produce(map<char, vector<int>> &table, set<char> vars, vector<string> pros, int n, int size)
+{
+    for (int j = 0; j < pros.size(); j++)
         {
 
             for (int i = 0; i < size; i++)
@@ -58,10 +55,12 @@ map<char, vector<int>> function_2(set<char> vars, vector<string> pros, bool PoS)
                 }
             }
         }
-    }
-    else
-    {
-        replace(table['X'].begin(),table['X'].end(), 0, 1 );    //Replacing all the 0's with 1's so I can make the maxterms = 0
+}
+
+
+void POS_produce(map<char, vector<int>> &table, set<char> vars, vector<string> pros, int n, int size)
+{
+    replace(table['X'].begin(),table['X'].end(), 0, 1 );    //Replacing all the 0's with 1's so I can make the maxterms = 0
         for (int j = 0; j < pros.size(); j++)
         {
 
@@ -82,10 +81,12 @@ map<char, vector<int>> function_2(set<char> vars, vector<string> pros, bool PoS)
                 }
             }
         }
-    }
-    vector<string> sums;
-    vector<string> products;
+}
 
+
+vector<string> Cano_SoP(map<char, vector<int>> &table, set<char> vars, int n, int size)
+{
+    vector<string> products;
     for (int i = 0; i < size; i++)  //Producing the products/minterms
     {
         if(table['X'][i])
@@ -100,7 +101,13 @@ map<char, vector<int>> function_2(set<char> vars, vector<string> pros, bool PoS)
             products.push_back(temp);
         }
     }
+    return products;
+}
 
+
+vector<string> Cano_PoS(map<char, vector<int>> &table, set<char> vars, int n, int size)
+{
+    vector<string> sums;
     for (int i = 0; i < size; i++)  //Producing the sums/Maxterms
     {
         if(!table['X'][i])
@@ -123,7 +130,30 @@ map<char, vector<int>> function_2(set<char> vars, vector<string> pros, bool PoS)
             sums.push_back(temp);
         }
     }
+    return sums;
+}
 
+
+
+
+map<char, vector<int>> function_2(set<char> vars, vector<string> pros, bool PoS)
+{
+    int n = vars.size();    //Storing it in a varialbe instead of calling the function everytime.
+    int size = 2 << n - 1;  //Bit operation to get the number of rows in the truth table.
+    
+    map<char, vector<int>> table;   //Creating a map(truth table) with Key index as the variables in the input
+                                    //and frequency as the vector of int that'll store the values (0,1) 
+    Fill_Truth_table(table, vars, n, size); //To fill the truth table.
+    if (PoS)   //checks whether it is PoS or not
+    {
+        POS_produce(table, vars, pros, n, size);    
+    }
+    else
+    {
+        SOP_produce(table, vars, pros, n, size);
+    }
+    vector<string> sums = Cano_PoS(table, vars, n, size);
+    vector<string> products = Cano_SoP(table, vars, n, size);
 
 //OUTPUT
 
