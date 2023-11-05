@@ -22,7 +22,7 @@ void function_1()
 
     while (!validate(boolexp, Pos))
     {
-        cout << "Incorrect Syntax is used, please re-enter: ";
+        cout << "Incorrect Syntax is used, please re-enter (max 10 variables): ";
 
         getline(cin, boolexp);
     }
@@ -146,7 +146,8 @@ bool validate(string &user_input, bool &pos)
     }
     else if (openC != closedC || alphacount == 0) // if no letter or if the brackers are unequal
         return false;
-
+    else if( alphacount > 10)
+        return false;
     for (int i = 0; i < n - 1; i++) // removing double negation
     {
         if (user_input[i] == '\'' && user_input[i + 1] == '\'')
