@@ -20,16 +20,10 @@ bool compare_terms(string x, string y)  //Making a function that returns true if
     return true;
 }
 
-void function_3(map<char, vector<int>> table, set<char> vars)
-{
-    vector<vector<int>> minterms;   //To store final minterms covered. First index it to which PI and 2nd index is to all the minterms
-    vector<int> old_minterms;   //To store the minterms of each basic term (Like 0001 covers minterm 1)
-    vector<string> pis; //To store the PIs. I made it vector because it was requested in the 4th Function
-    set<string> remover;    //To store all the used "terms" or expressions to remove them from the final list as they're not PIs
-    int size = table['X'].size();   //Just to stop calling the function alot
-    vector<string> terms;   //To store the initial expressions
 
-    for (int i = 0; i < size; i++)  //For loop that adds every Minterm into "terms" as 0's and 1's. It also saves what minterm each part represents/covers
+void term_generator(map<char, vector<int>> &table, vector<string> &terms, vector<int> &old_minterms)
+{
+    for (int i = 0; i < table['X'].size(); i++)  //For loop that adds every Minterm into "terms" as 0's and 1's. It also saves what minterm each part represents/covers
     {
         string temp = "";
         map<char, vector<int>>::iterator iter = table.begin();
@@ -46,10 +40,12 @@ void function_3(map<char, vector<int>> table, set<char> vars)
             old_minterms.push_back(i);
         }
     }
+}
 
-    vector<set<string>> sets(vars.size() + 1);  //Made a vector of sets. Each set represents the group of terms and divided them on the basis of numbers of 1's in each.
-    size = terms.size();
-    for (int i = 0; i < size; i++)
+
+void Set_dividor(vector<set<string>> &sets, vector<string> terms)
+{
+    for (int i = 0; i < terms.size(); i++)
     {
         int count = 0;
         for (int j = 0; j < terms[i].length(); j++) //I count the number of ones and add it to its corresponding Set
@@ -59,8 +55,13 @@ void function_3(map<char, vector<int>> table, set<char> vars)
         }
         sets[count].insert(terms[i]);
     }
+}
 
-    size = sets.size() - 1; //Needed this to save the last index in the vector
+
+void PI_Set_gen(vector<set<string>> &sets)
+{
+    set<string> remover;    //To store all the used "terms" or expressions to remove them from the final list as they're not PIs
+    int size = sets.size() - 1; //Needed this to save the last index in the vector
     for (int i = 0; i < sets.size() - 2; i++)
     {
         if (sets[i].size() > 0) //Since each group we compare, we insert the new terms in a new set, I check if there is a set of implicants that we are going to compare the current one with, and if there is, then we insert a new set to insert the new ones in.
@@ -129,6 +130,27 @@ void function_3(map<char, vector<int>> table, set<char> vars)
                 iter++;
         }
     }
+}
+
+
+void function_3(map<char, vector<int>> table, set<char> vars)
+{
+    vector<vector<int>> minterms;   //To store final minterms covered. First index it to which PI and 2nd index is to all the minterms
+    vector<int> old_minterms;   //To store the minterms of each basic term (Like 0001 covers minterm 1)
+    vector<string> pis; //To store the PIs. I made it vector because it was requested in the 4th Function 
+    vector<string> terms;   //To store the initial expressions
+    term_generator(table, terms, old_minterms);
+
+
+    
+
+    vector<set<string>> sets(vars.size() + 1);  //Made a vector of sets. Each set represents the group of terms and divided them on the basis of numbers of 1's in each.
+
+    Set_dividor(sets, terms);
+    
+    PI_Set_gen(sets);
+
+    
 
     for (int i = 0; i < sets.size(); i++)   //Pushing the PIs into a vector of strings for the next user to use them. Also initializing a vector of numbers in its index to save the minterms it covers in.
         for (set<string>::iterator j = sets[i].begin(); j != sets[i].end(); j++)
