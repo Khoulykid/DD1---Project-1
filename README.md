@@ -34,31 +34,45 @@ Since all the outputs are depending on eachothers there has to be communication 
 
 1. *Input & Validation Function*:
 
-    >This function is responsibile for the input of the user and the validation of SOP and POS form to ensure valid input. It also removes spaces from strings entered and if there is double negation it removes them to reduce further problems. (Sarah Elsamanody)
+    >This function is responsibile for the input of the user and the validation of SOP and POS form to ensure valid input. It also removes spaces from strings entered and if there is double negation it removes them to reduce further problems.
+
+    (Sarah Elsamanody)
 
 2. *TruthTable & Canonical SOP/POS Forms Function*:
    
-    >This function then takes the formatted input and from it, it displays the truth tables and by the truth table it gets corresponding SOP and POS. (Ali Elkhouly)
+    >This function then takes the formatted input and from it, it displays the truth tables and by the truth table it gets corresponding SOP and POS.
+    
+    (Ali Elkhouly)
 
 3.  *Prime Implicant Generation & their Minterms Function*:
     
-    >This function takes the truth table and works around to generate the PIs and what minterms do they cover and displays the following in their binary representation. (Ali Elkhouly)
+    >This function takes the truth table and works around to generate the PIs and what minterms do they cover and displays the following in their binary representation.
+    
+    (Ali Elkhouly)
 
 4. *Printing Essential Prime Implicants and the Minterms not Covered by EPIs Function*:
 
-    >This function takes generated prime implicants from function 3 and check from them those defined as essential and prints them out in their boolean expression and then checks for the minterms not covered by the EPIs and prints them in their numbering format. (Sarah Elsamanody)
+    >This function takes generated prime implicants from function 3 and check from them those defined as essential and prints them out in their boolean expression and then checks for the minterms not covered by the EPIs and prints them in their numbering format.
+    
+    (Sarah Elsamanody)
     
 5. *Generating Minimized Expression through Quine McCluskey Function*:
 
-    >This function takes from the one before the eliminated coverage chart which is the second step in Quine McClausky method as it can be automatically accomplished by the NON-EPIs and the minterms not covered by them. Then, with the data provided dominated rows and columns are eliminated leaving us with the minimized expression of the boolean expression. (Nour Yasser)
+    >This function takes from the one before the eliminated coverage chart which is the second step in Quine McClausky method as it can be automatically accomplished by the NON-EPIs and the minterms not covered by them. Then, with the data provided dominated rows and columns are eliminated leaving us with the minimized expression of the boolean expression.
+    
+    (Nour Yasser)
 
 6. *Generation of the Kmap Function*:
 
-    >This function displays the kmap finalized covers to be taken to achieve the minimized expression from the kmap generated from truth table by showcasing covers through multiple kmaps such that each kmap represents one cover.  (Nour Yasser)
+    >This function displays the kmap finalized covers to be taken to achieve the minimized expression from the kmap generated from truth table by showcasing covers through multiple kmaps such that each kmap represents one cover.
+    
+    (Nour Yasser)
 
 7. *Generation of the Circuit using Wavedrom Function*:
 
-    >This function displays the circuit of the minimized expression by using fstream in C++ and writing the script for an html which will then be automatically called to display the minimized expression as a circuit diagram.  (Nour Yasser)
+    >This function displays the circuit of the minimized expression by using fstream in C++ and writing the script for an html which will then be automatically called to display the minimized expression as a circuit diagram.
+    
+    (Nour Yasser)
      
 ***For more details check the headers files of each function. Everything is commented to be easily followed and understood.***
 
