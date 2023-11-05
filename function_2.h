@@ -8,13 +8,16 @@
 #include <algorithm>
 #include <iomanip>
 
-
 using namespace std;
 
 
-void Fill_Truth_table(map<char, vector<int>> &table, set<char> vars, int n, int size)    //Function to fill the Truth Table.
+map<char, vector<int>> function_2(set<char> vars, vector<string> pros, bool PoS)
 {
-    
+    int n = vars.size();    //Storing it in a varialbe instead of calling the function everytime.
+    int size = 2 << n - 1;  //Bit operation to get the number of rows in the truth table.
+    map<char, vector<int>> table;   //Creating a map(truth table) with Key index as the variables in the input
+    //and frequency as the vector of int that'll store the values (0,1) 
+
     for (set<char>::iterator iter = vars.begin(); iter != vars.end(); iter++)
         table.insert(pair<char, vector<int>>(*iter, vector<int>(size)));    //Initializing the variables in the Map (Key)
 
@@ -31,12 +34,12 @@ void Fill_Truth_table(map<char, vector<int>> &table, set<char> vars, int n, int 
         }
         iter--;
     }
-}
 
 
-void SOP_produce(map<char, vector<int>> &table, set<char> vars, vector<string> pros, int n, int size)
-{
-    for (int j = 0; j < pros.size(); j++)
+
+    if (!PoS)   //checks whether it is PoS or not
+    {
+        for (int j = 0; j < pros.size(); j++)
         {
 
             for (int i = 0; i < size; i++)
@@ -46,7 +49,7 @@ void SOP_produce(map<char, vector<int>> &table, set<char> vars, vector<string> p
                     int final = 1;
                     for (int k = 0; k < pros[j].length(); k++)
                     {
-                        if (pros[j][k+1] == '\'')
+                        if (pros[j][k + 1] == '\'')
                             final = final && !table[pros[j][k++]][i];   //Checks whether it is inverted or not
                         else
                             final = final && table[pros[j][k]][i];
@@ -55,12 +58,10 @@ void SOP_produce(map<char, vector<int>> &table, set<char> vars, vector<string> p
                 }
             }
         }
-}
-
-
-void POS_produce(map<char, vector<int>> &table, set<char> vars, vector<string> pros, int n, int size)
-{
-    replace(table['X'].begin(),table['X'].end(), 0, 1 );    //Replacing all the 0's with 1's so I can make the maxterms = 0
+    }
+    else
+    {
+        replace(table['X'].begin(), table['X'].end(), 0, 1);    //Replacing all the 0's with 1's so I can make the maxterms = 0
         for (int j = 0; j < pros.size(); j++)
         {
 
@@ -69,54 +70,46 @@ void POS_produce(map<char, vector<int>> &table, set<char> vars, vector<string> p
                 if (table['X'][i] == 1) //Check if it's 1 so that I do not edit over an already existing 0
                 {
                     int final = 1;
-                    for (int k = 0; k < pros[j].length(); k+=2) //Iterate by 2 steps to avoid checking over the +
+                    for (int k = 0; k < pros[j].length(); k += 2) //Iterate by 2 steps to avoid checking over the +
                     {
-                        if (pros[j][k+1] == '\'')   //Checking for invert
+                        if (pros[j][k + 1] == '\'')   //Checking for invert
                             final = final && table[pros[j][k++]][i];
                         else
                             final = final && !table[pros[j][k]][i];
                     }
-                    if(final)
+                    if (final)
                         table['X'][i] = 0;
                 }
             }
         }
-}
-
-
-vector<string> Cano_SoP(map<char, vector<int>> &table, set<char> vars, int n, int size)
-{
+    }
+    vector<string> sums;
     vector<string> products;
+
     for (int i = 0; i < size; i++)  //Producing the products/minterms
     {
-        if(table['X'][i])
+        if (table['X'][i])
         {
             string temp = "";
             for (set<char>::iterator ita = vars.begin(); ita != vars.end(); ita++)
             {
                 temp += *ita;
-                if(!table[*ita][i])
+                if (!table[*ita][i])
                     temp += '\'';
             }
             products.push_back(temp);
         }
     }
-    return products;
-}
 
-
-vector<string> Cano_PoS(map<char, vector<int>> &table, set<char> vars, int n, int size)
-{
-    vector<string> sums;
     for (int i = 0; i < size; i++)  //Producing the sums/Maxterms
     {
-        if(!table['X'][i])
+        if (!table['X'][i])
         {
             string temp = "";
             for (set<char>::iterator ita = vars.begin(); ita != vars.end(); ita++)
             {
-                temp+= *ita;
-                if(table[*ita][i])
+                temp += *ita;
+                if (table[*ita][i])
                 {
                     temp += '+';
                 }
@@ -126,39 +119,16 @@ vector<string> Cano_PoS(map<char, vector<int>> &table, set<char> vars, int n, in
                     temp += '+';
                 }
             }
-            temp.erase(remove(temp.end()-1, temp.end(), '+'), temp.end());
+            temp.erase(remove(temp.end() - 1, temp.end(), '+'), temp.end());
             sums.push_back(temp);
         }
     }
-    return sums;
-}
 
 
+    //OUTPUT
 
-
-map<char, vector<int>> function_2(set<char> vars, vector<string> pros, bool PoS)
-{
-    int n = vars.size();    //Storing it in a varialbe instead of calling the function everytime.
-    int size = 2 << n - 1;  //Bit operation to get the number of rows in the truth table.
-    
-    map<char, vector<int>> table;   //Creating a map(truth table) with Key index as the variables in the input
-                                    //and frequency as the vector of int that'll store the values (0,1) 
-    Fill_Truth_table(table, vars, n, size); //To fill the truth table.
-    if (PoS)   //checks whether it is PoS or not
-    {
-        POS_produce(table, vars, pros, n, size);    
-    }
-    else
-    {
-        SOP_produce(table, vars, pros, n, size);
-    }
-    vector<string> sums = Cano_PoS(table, vars, n, size);
-    vector<string> products = Cano_SoP(table, vars, n, size);
-
-//OUTPUT
-
-    cout <<  "~~~~~~~~~~~~~~~TRUTH TABLE~~~~~~~~~~~~~~~\n";
-    cout << setw(21-n);
+    cout << "~~~~~~~~~~~~~~TRUTH TABLE~~~~~~~~~~~~~~\n";
+    cout << setw(21 - n);
     for (set<char>::iterator itar = vars.begin(); itar != vars.end(); itar++)
     {
         cout << *itar << " ";
@@ -166,25 +136,25 @@ map<char, vector<int>> function_2(set<char> vars, vector<string> pros, bool PoS)
     cout << 'X' << '\n';
     for (int i = 0; i < size; i++)
     {
-        cout << setw(21-n);
+        cout << setw(21 - n);
         for (set<char>::iterator itar = vars.begin(); itar != vars.end(); itar++)
         {
             cout << table[*itar][i] << " ";
-            
+
         }
         cout << table['X'][i] << "\n";
-        
+
     }
 
-    cout <<  "\n\n~~~~~~~~~~~~~~~SUM OF PRODUCTS~~~~~~~~~~~~~~~\n\n";
+    cout << "\n\n~~~~~~~~~~~~~~SUM OF PRODUCTS~~~~~~~~~~~~~~\n\n";
     for (int i = 0; i < products.size(); i++)
     {
         cout << products[i];
-        if(i != products.size()-1)
+        if (i != products.size() - 1)
             cout << " + ";
     }
-    
-    cout << "\n\n\n~~~~~~~~~~~~~~~PRODUCT OF SUMS~~~~~~~~~~~~~~~\n\n";
+
+    cout << "\n\n\n~~~~~~~~~~~~~~PRODUCT OF SUMS~~~~~~~~~~~~~~\n\n";
     for (int i = 0; i < sums.size(); i++)
     {
         cout << '(' << sums[i] << ")";

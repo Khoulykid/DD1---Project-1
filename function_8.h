@@ -14,10 +14,14 @@ void function_8(string boolexp)
     vector<string> terms; 
     int n = boolexp.length();
     string temp("");
+    bool x(false);
+    if (boolexp == "1")
+        x = true;
+
     for (int i = 0; i < n; i++)
     {
 
-        if (isalpha(boolexp[i]) || boolexp[i] == '\'')
+        if (isalpha(boolexp[i]) || boolexp[i] == '\'' || x )
             temp += boolexp[i];
         if (boolexp[i] == '+' || boolexp[i + 1] == '\0')
         {
@@ -39,7 +43,7 @@ void function_8(string boolexp)
         {
             for (int j = 0; j < terms[i].size(); j++)
             {
-                if (isalpha(terms[i][j]))
+                if (isalpha(terms[i][j]) || x)
                     count++;           // counter for numof chars in each
 
             }
@@ -108,13 +112,15 @@ void function_8(string boolexp)
     }
     output2.close();
     input.close();
-    std::system("C:/Users/noury/source/repos/DD1proj1/DD1proj1/circuit.html");
+    string ans;
+    cout << "\n\n\n~~~~~~~~~~~~~~~CIRCUIT DISPLAY~~~~~~~~~~~~~~~\n\n";
+    cout << "Do you wish to display the circuit? yes/no \n";
+    cin >> ans;
+    if(ans == "yes" || ans == "Yes")
+        std::system("C:/Users/noury/source/repos/DD1proj1/DD1proj1/circuit.html");
 
     
 }
-
-
-
 
 
 

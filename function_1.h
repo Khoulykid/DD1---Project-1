@@ -3,13 +3,17 @@
 
 #include <iostream>
 #include <vector>
-#include <set>
 #include <map>
+#include <set>
 #include <string>
 #include <algorithm>
 #include <iomanip>
+#include "function_2.h"
+#include "function_3.h"
 
 using namespace std;
+
+bool validate(string& user_input, bool& pos);
 
 void function_1()
 {
@@ -39,8 +43,10 @@ void function_1()
         if (isalpha(boolexp[i]))
         {
             vars.insert(boolexp[i]);
-            temp += boolexp[i];
         }
+
+        if (isalpha(boolexp[i]) || boolexp[i] == '\'')
+            temp += boolexp[i];
 
         if (Pos)
         {
@@ -62,9 +68,11 @@ void function_1()
             }
         }
     }
+
+    function_3(function_2(vars, terms, Pos),vars);
 }
 
-bool validate(string &user_input, bool &pos)
+bool validate(string& user_input, bool& pos)
 {
     int n = user_input.length();
     int openC(0), closedC(0), err(0), plusC(0), alphacount(0), foundalpha(0), foundplus(0);
@@ -76,11 +84,11 @@ bool validate(string &user_input, bool &pos)
 
     user_input.erase(remove(user_input.begin(), user_input.end(), ' '), user_input.end());
     n = user_input.length();
-
-    for (int i = 0; i < n; i++ )
+    for (int i = 0; i < n; i++)
     {
         if (isalpha(user_input[i]))
         {
+            
             alphacount++;
             if (found) // alpha count per bracket
                 foundalpha++;
@@ -115,16 +123,21 @@ bool validate(string &user_input, bool &pos)
         }
         if (user_input[i] == '(')
         {
+            
             found = true;
             openC++;
-            if (user_input[i + 1] == '\'' || user_input[i + 1] == '+' || (isalpha(user_input[i - 1]) && i != 0)) // no invalid charackets after or before open bracket
+            
+            if (user_input[i + 1] == '\'' || user_input[i + 1] == '+' || ( i != 0 && isalpha(user_input[i - 1]))) // no invalid charackets after or before open bracket
                 return false;
+
         }
 
         if (user_input[i] == ')')
         {
+            
             if (foundalpha > 1 && foundplus == 0) // making sure that two consecutive letters in a bracket is invalid
             {
+                
                 return false;
             }
 
@@ -133,7 +146,6 @@ bool validate(string &user_input, bool &pos)
             foundplus = 0; // reinitializing for next bracket check
 
             closedC++;
-
             if (user_input[i + 1] == '\'' || user_input[i + 1] == '+' || isalpha(user_input[i + 1])) // no invalid characters after closed bracket
                 return false;
         }
@@ -146,8 +158,8 @@ bool validate(string &user_input, bool &pos)
     }
     else if (openC != closedC || alphacount == 0) // if no letter or if the brackers are unequal
         return false;
-    else if( alphacount > 10)
-        return false;
+   // else if (alphacount > 10)
+     //   return false;
     for (int i = 0; i < n - 1; i++) // removing double negation
     {
         if (user_input[i] == '\'' && user_input[i + 1] == '\'')
@@ -156,7 +168,7 @@ bool validate(string &user_input, bool &pos)
             i--;
         }
     }
-
     return true;
+
 }
 #endif

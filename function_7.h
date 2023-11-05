@@ -8,7 +8,7 @@
 #include <set>
 using namespace std;
 
-vector<vector<int>> fourVariables(vector<vector<int>> &kmap, vector<string> minmized, int i)
+vector<vector<int>> fourVariables(vector<vector<int>> &kmap, vector<string> minmized, int i) //4x4 and 4 variables input
 {
 	if (minmized[i] == "a'b'c'd'")
 	{
@@ -159,7 +159,7 @@ vector<vector<int>> fourVariables(vector<vector<int>> &kmap, vector<string> minm
 
 };
 
-vector<vector<int> > threeVariables(vector<vector<int>> &kmap, vector<string> minmized, int i)
+vector<vector<int> > threeVariables(vector<vector<int>> &kmap, vector<string> minmized, int i)  //4x4 and 3 variables input
 	{
 		if (minmized[i] == "a'b'c'")
 		{
@@ -453,7 +453,7 @@ vector<vector<int> > threeVariables(vector<vector<int>> &kmap, vector<string> mi
 	
 	return kmap;
 }
-vector<vector<int>> twoVariables(vector<vector<int>> &kmap, vector<string> minmized, int i)
+vector<vector<int>> twoVariables(vector<vector<int>> &kmap, vector<string> minmized, int i)  //4x4 and 2 variables input
 {
 
 	if (minmized[i] == "a'b'")
@@ -679,7 +679,7 @@ vector<vector<int>> twoVariables(vector<vector<int>> &kmap, vector<string> minmi
 
 	return kmap;
 }
-vector<vector<int>> oneVariables(vector<vector<int>> &kmap, vector<string> minmized, int i)
+vector<vector<int>> oneVariables(vector<vector<int>> &kmap, vector<string> minmized, int i)  //4x4 and 1 variable input
 {
 
 	if (minmized[i] == "a'")
@@ -759,7 +759,7 @@ vector<vector<int>> oneVariables(vector<vector<int>> &kmap, vector<string> minmi
 }
 // ---------------------------------------------------------------------------------------------------------------------------------
 // 3 variables function
-vector<vector<int> > threeforthree(vector<vector<int>> &kmap, vector<string> minmized, int i)
+vector<vector<int> > threeforthree(vector<vector<int>> &kmap, vector<string> minmized, int i)  //2x4 and 3 variables input
 {
 	if (minmized[i] == "a'b'c'")
 	{
@@ -819,7 +819,7 @@ vector<vector<int> > threeforthree(vector<vector<int>> &kmap, vector<string> min
 	}
 	return kmap;
 }
-vector<vector<int>> threefortwo(vector<vector<int>> &kmap, vector<string> minmized, int i)
+vector<vector<int>> threefortwo(vector<vector<int>> &kmap, vector<string> minmized, int i) //2x4 and 2 variables input
 {
 	if (minmized[i] == "a'b'")
 	{
@@ -907,7 +907,7 @@ vector<vector<int>> threefortwo(vector<vector<int>> &kmap, vector<string> minmiz
 	}
 	return kmap;
 }
-vector<vector<int>> threeforone(vector<vector<int>> &kmap, vector<string> minmized, int i)
+vector<vector<int>> threeforone(vector<vector<int>> &kmap, vector<string> minmized, int i) //2x4 and 1 variable input
 {
 	if (minmized[i] == "a'")
 	{
@@ -958,7 +958,7 @@ vector<vector<int>> threeforone(vector<vector<int>> &kmap, vector<string> minmiz
 // two variable functions
 
 
-vector<vector<int> > twofortwo(vector<vector<int>> &kmap, vector<string> minmized, int i)
+vector<vector<int> > twofortwo(vector<vector<int>> &kmap, vector<string> minmized, int i) //2x2 and 2 variables input
 {
 	if (minmized[i] == "a'b'")
 	{
@@ -991,7 +991,7 @@ vector<vector<int> > twofortwo(vector<vector<int>> &kmap, vector<string> minmize
 	return kmap;
 }
 
-vector<vector<int> > twoforone(vector<vector<int>> &kmap, vector<string> minmized, int i)
+vector<vector<int> > twoforone(vector<vector<int>> &kmap, vector<string> minmized, int i) //2x2 and 1 variable input
 {
 	if (minmized[i] == "a'")
 	{
@@ -1024,7 +1024,7 @@ vector<vector<int> > twoforone(vector<vector<int>> &kmap, vector<string> minmize
 	return kmap;
 }
 // printing functions 
-void print(vector<vector<int>> kmap, vector<string> min)
+void print(vector<vector<int>> kmap, vector<string> min) 
 {
 	
 		for (int i = 0; i < kmap.size(); i++)
@@ -1055,7 +1055,7 @@ void print(vector<vector<int>> kmap, vector<string> min)
 	
 	
 };
-void print2(vector<int> kmap, vector<string> min)
+void print2(vector<int> kmap, vector<string> min) // if it is only one variable
 {
 
 	cout << kmap[0] << " | " << kmap[1] << endl;
@@ -1064,149 +1064,153 @@ void print2(vector<int> kmap, vector<string> min)
 };
 void f7(vector<string> minmized, string variables)
 {
-	int n = variables.length();
-	string masking = "abcd";
-	vector<string> temp;
-	vector<int> countalpha(minmized.size(), 0);
-	
-	for (int i = 0; i < minmized.size(); i++) //Masking
+	if (variables.length() <= 4)
 	{
-		string tempo("");
-		for (int j = 0; j < minmized[i].length(); j++)
+
+		int n = variables.length();
+		string masking = "abcd";
+		vector<string> temp;
+		vector<int> countalpha(minmized.size(), 0);
+
+		for (int i = 0; i < minmized.size(); i++) //Masking
 		{
-			if (minmized[i][j] == '\'')
-				tempo += minmized[i][j];
-			else
-				for (int k = 0; k < variables.length(); k++)
-			
-					if (minmized[i][j] == variables[k])
+			string tempo("");
+			for (int j = 0; j < minmized[i].length(); j++)
+			{
+				if (minmized[i][j] == '\'')
+					tempo += minmized[i][j];
+				else
+					for (int k = 0; k < variables.length(); k++)
+
+						if (minmized[i][j] == variables[k])
+						{
+							tempo += masking[k];
+							countalpha[i] ++;
+						}
+			}
+			temp.push_back(tempo);
+
+		}
+		if (variables.length() == 4) // if they are 4 variables
+		{
+			vector<vector<int>> kmap =
+			{
+			{0, 0, 0, 0},
+			{0, 0, 0, 0},
+			{0, 0, 0, 0},
+			{0, 0, 0, 0}
+			};
+
+			for (int i = 0; i < countalpha.size(); i++)
+			{
+				if (countalpha[i] == 4) // if this element has the 4 variables
+				{
+					fourVariables(kmap, temp, i);
+
+				}
+				else if (countalpha[i] == 3)	// if this element has the 3 variables
+				{
+					threeVariables(kmap, temp, i);
+
+				}
+				else if (countalpha[i] == 2)	// if this element has the 2 variables
+				{
+					twoVariables(kmap, temp, i);
+
+				}
+				else if (countalpha[i] == 1)	// if this element has the 1 variables
+				{
+					oneVariables(kmap, temp, i);
+
+				}
+
+				cout << "Cover:" << minmized[i] << endl;
+				print(kmap, minmized);
+
+			}
+
+
+		}
+		else if (variables.length() == 3) // if they are 3 variables
+		{
+			vector<vector<int>> kmap = {
+			{0, 0, 0, 0},
+			{0, 0, 0, 0},
+			};
+			for (int i = 0; i < countalpha.size(); i++)
+			{
+				if (countalpha[i] == 3)		// if this element has the 3 variables
+				{
+					threeforthree(kmap, temp, i);
+				}
+				else if (countalpha[i] == 2)	// if this element has the 2 variables
+				{
+					threefortwo(kmap, temp, i);
+				}
+				else                            // if this element has the 1 variables
+					threeforone(kmap, temp, i);
+
+				cout << "Cover:" << minmized[i] << endl;
+
+				print(kmap, minmized);
+			}
+
+		}
+		else if (variables.length() == 2) // if they are 2 variables
+		{
+			vector<vector<int>> kmap = {
+			{0, 0},
+			{0, 0},
+
+			};
+			for (int i = 0; i < countalpha.size(); i++)
+			{
+
+				if (countalpha[i] == 2) // if this element has the 2 variables
+				{
+					twofortwo(kmap, temp, i);
+				}
+				else                    // if this element has 1 variable
+				{
+					twoforone(kmap, temp, i);
+				}
+				cout << "Cover:" << minmized[i] << endl;
+
+				print(kmap, minmized);
+
+			}
+
+
+		}
+		else if (variables.length() == 1) // if it is 1 variable
+		{
+			vector<int> kmap =
+			{
+			{0, 0},
+			};
+			for (int i = 0; i < countalpha.size(); i++)
+			{
+				if (temp[i] == "a")
+				{
+					kmap =
 					{
-						tempo += masking[k];
-						countalpha[i] ++;
-					}
-		}
-		temp.push_back(tempo);
-
-	}
-	if (variables.length() == 4)
-	{
-		vector<vector<int>> kmap =
-		{
-		{0, 0, 0, 0},
-		{0, 0, 0, 0},
-		{0, 0, 0, 0},
-		{0, 0, 0, 0}
-		};
-
-		for (int i = 0; i < countalpha.size(); i++)
-		{
-			if (countalpha[i] == 4)
-			{
-				fourVariables(kmap, temp, i);
-
-			}
-			else if (countalpha[i] == 3)
-			{
-				threeVariables(kmap, temp, i);
-
-			}
-			else if (countalpha[i] == 2)
-			{
-				twoVariables(kmap, temp, i);
-
-			}
-			else if (countalpha[i] == 1)
-			{
-				oneVariables(kmap, temp, i);
-
-			}
-			
-			cout << "Cover:" << minmized[i] << endl;
-			print(kmap, minmized);
-
-		}
-
-
-	}
-	else if (variables.length() == 3)
-	{
-		vector<vector<int>> kmap = {
-		{0, 0, 0, 0},
-		{0, 0, 0, 0},
-		};
-		for (int i = 0; i < countalpha.size(); i++)
-		{
-			if (countalpha[i]==3)
-			{
-				threeforthree(kmap, temp, i);
-			}
-			else if (countalpha[i] == 2)
-			{
-				threefortwo(kmap, temp, i);
-			}
-			else
-				threeforone(kmap, temp, i);
-
-			cout << "Cover:" << minmized[i] << endl;
-
-			print(kmap, minmized);
-		}
-
-	}
-	else if (variables.length() == 2)
-	{
-		vector<vector<int>> kmap = {
-		{0, 0},
-		{0, 0},
-
-		};
-		for (int i = 0; i < countalpha.size(); i++)
-		{
-
-			if (countalpha[i] == 2)
-			{
-				twofortwo(kmap, temp, i);
-			}
-			else
-			{
-				twoforone(kmap, temp, i);
-			}
-			cout << "Cover:" << minmized[i] << endl;
-
-			print(kmap, minmized);
-
-		}
-
-
-	}
-	else if (variables.length() == 1)
-	{
-		vector<int> kmap = 
-		{
-		{0, 0},
-		};
-		for (int i = 0; i < countalpha.size(); i++)
-		{
-			if (temp[i] == "a")
-			{
-				kmap = 
+						{0, 1}
+					};
+				}
+				else if (temp[i] == "a'")
 				{
-					{0, 1}
-				};
-			}
-			else if (temp[i] == "a'")
-			{
-				kmap = 
-				{
-					{1, 0}
-				};
-			}
-			cout << "Cover:" << minmized[i] << endl;
+					kmap =
+					{
+						{1, 0}
+					};
+				}
+				cout << "Cover:" << minmized[i] << endl;
 
-			print2(kmap, minmized);
+				print2(kmap, minmized);
+			}
+
+
 		}
-
-
 	}
 };
 

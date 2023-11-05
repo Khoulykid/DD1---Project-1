@@ -1,0 +1,50 @@
+
+
+In q6 we were asked to take the coverage chart and return the minimized function. To do this we had to :
+Implement an algorithm that 
+1- Detects and removes the dominating columns
+2- Detects and removes the dominated rows
+3- Removes and stores the single number of one's in each column
+4- Use the given EPIs from previous functions and print them with the remaining PIs
+
+We implemented them using 6 different functions and implemented the chart using a vector<pair<string, vector<int>> and manipulate them using loops to output the correct minimized expression. The string represents the keys and the vector<int> repreent the minterms by each row.
+
+Conflicts faced:
+1-To loop over vector<pair<string, vector<int>> columns and rows correctly to find which are dominated/dominating
+2-Coming up with a simple algorithm that returns if rows/columns are dominated/dominating
+3-Correctly erase and count for duplicate as well as looping backward as well
+4-Repedeatly check for single ones after removing columns/rows
+
+
+In q7 we were asked to output the K-map and the covers of the minimized expression. To do this we have to:
+1-Combine both EPIS and PIs in one vector to contain the needed covers
+2-Transform the EPIs & PIS to strings to be able to print the covers using K-maps
+3-Accomidate for every possibility of covers & different numbers of variables as they would output distinct k-maps and covers.
+
+Conflicts faced:
+1-Thinking of all possibilities and listing them
+2-Make the algorithm work for any number of variables even if minimized functions reduces the number of variables in the final output
+
+In q8 we had to draw the minimized function using wavedorm, To do this we had to :
+1-Use a string and write in javascript file the code needed to output the right logic circuit
+2-Link waveform to HTML in order for the code to automatically output the circuit
+3-Use the javascript code and write it to the HTML code because it has to be updated for each logic circuit
+
+Conflicts faced:
+1-Link wavedorm to html
+2-Writing the right syntax for javascript for diverse logic circuits
+3-Reading, writing & updating between the c++, html & javascript codes
+
+Test cases 
+1-aaa+a' -To make sure that it runs correctly for duplicates
+2-a'''+ab -To handle the number ' and accommodate it accordingly
+3-a''+ab - To handle the number ' and accommodate it accordingly
+3-ab'+20 -Only takes valid inputs from users
+4-1001 -Will not take binary inputs and only Pos or Sop
+5-(a+b)(c+d') - Validate Pos
+6-c'd+cd'+c'd'+cd - Works even when boolean expression is equal to 1
+7-a'b'c'd'e'f' + ab'c'd'e'f' + a'bc'd'e'f' + abc'd'e'f' + a'b'cd'e'f' + ab'cd'e'f' + a'bcd'e'f'- Works and does not print K-map
+8-abc+bcd' - Normal test
+9-a'bc'd'+ab'c'd'+a'bcd'+ab'cd'+abcd'+abc'd'+abcd+abcd'+a'bcd'+abcd -Only EPIS are minimized function
+10-a'c' + bc'd + acd + b'cd' - Normal test
+
