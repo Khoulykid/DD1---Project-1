@@ -6,7 +6,7 @@
 ## General Informationa about the Project
 - This project is written with C++ and it scripts HTML at one part to generat wavedrom code for excuting curcuit diagrams.
 - The output is displayed in the consule and does not use GUI features.
-- This project is the outcome of proper team work, organization and communication. The final product would not have happened without all its contributes.
+- This project is the outcome of proper team work, organization and communication. The final product would not have happened without all its contributers.
 
 -----
 ## Purpose of Project :-
