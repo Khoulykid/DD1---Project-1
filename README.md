@@ -1,6 +1,6 @@
 # DD1-Project-1
 ### CSCE2301 – Digital Design I Project 1
-### Contributers: sarah elsamanody 900212915 - ali elkhouly - nour yasser 900213024
+### Contributers: sarah elsamanody 900212915 - ali elkhouly 900212679 - nour yasser 900213024
 -----
 
 ## General Informationa about the Project
