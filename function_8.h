@@ -9,7 +9,7 @@
 #include<fstream>
 #include<sstream>
 using namespace std;
-void function_8(string boolexp)
+void Circuit_gen(string boolexp)
 {
     vector<string> terms; 
     int n = boolexp.length();

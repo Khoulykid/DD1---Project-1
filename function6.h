@@ -210,7 +210,7 @@ string print(vector<string> PIs, string variables) //transform PIs and EPIs to u
 	cout << endl;
 	return temp;
 }
-void f6(vector<pair<string, vector<int>>> coverage_chart, vector<string> EPIs, string variables )
+void QM_gen(vector<pair<string, vector<int>>> coverage_chart, vector<string> EPIs, string variables )
 {
 	vector<string> PIs_to_take;
 	int count = 0;
@@ -273,8 +273,8 @@ void f6(vector<pair<string, vector<int>>> coverage_chart, vector<string> EPIs, s
 	}
 
 	
-	f7(FormattedPIs, variables); //send after altered to merge with functions
-	function_8(print(PIs_to_take, variables));	//send after altered to merge with functions
+	Kmap_gen(FormattedPIs, variables); //send after altered to merge with functions
+	Circuit_gen(print(PIs_to_take, variables));	//send after altered to merge with functions
 
 
 };

@@ -60,7 +60,7 @@ void print(vector<string> EPIs, vector<int> notcoveredmins, string variables)
    
 }
 
-void function_4_5(map<char, vector<int> > table, vector<string> PIs, vector< vector<int> > minterms, set<char> vars)
+void EPI_gen(map<char, vector<int> > table, vector<string> PIs, vector< vector<int> > minterms, set<char> vars)
 {
     string variables ("");
     int i(0);
@@ -161,6 +161,6 @@ void function_4_5(map<char, vector<int> > table, vector<string> PIs, vector< vec
         }
 
     }
-    f6(CoverChart, EPIs, variables);
+    QM_gen(CoverChart, EPIs, variables);
 }
 #endif

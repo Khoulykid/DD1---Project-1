@@ -15,7 +15,7 @@ using namespace std;
 
 bool validate(string& user_input, bool& pos);
 
-void function_1()
+void User_input()
 {
     string boolexp;
     bool Pos(false);
@@ -69,7 +69,7 @@ void function_1()
         }
     }
 
-    function_3(function_2(vars, terms, Pos),vars);
+    PI_gen(Truth_Table_gen(vars, terms, Pos),vars);
 }
 
 bool validate(string& user_input, bool& pos)

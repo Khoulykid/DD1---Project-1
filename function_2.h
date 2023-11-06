@@ -11,7 +11,7 @@
 using namespace std;
 
 
-map<char, vector<int>> function_2(set<char> vars, vector<string> pros, bool PoS)
+map<char, vector<int>> Truth_Table_gen(set<char> vars, vector<string> pros, bool PoS)
 {
     int n = vars.size();    //Storing it in a varialbe instead of calling the function everytime.
     int size = 2 << n - 1;  //Bit operation to get the number of rows in the truth table.

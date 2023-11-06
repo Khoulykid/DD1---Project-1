@@ -1062,7 +1062,7 @@ void print2(vector<int> kmap, vector<string> min) // if it is only one variable
 	cout << endl;
 
 };
-void f7(vector<string> minmized, string variables)
+void Kmap_gen(vector<string> minmized, string variables)
 {
 	if (variables.length() <= 4)
 	{

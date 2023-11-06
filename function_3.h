@@ -22,7 +22,7 @@ bool compare_terms(string x, string y)  //Making a function that returns true if
     return true;
 }
 
-void function_3(map<char, vector<int>> table, set<char> vars)
+void PI_gen(map<char, vector<int>> table, set<char> vars)
 {
     vector<vector<int>> minterms;   //To store final minterms covered. First index it to which PI and 2nd index is to all the minterms
     vector<int> old_minterms;   //To store the minterms of each basic term (Like 0001 covers minterm 1)
@@ -161,13 +161,13 @@ void function_3(map<char, vector<int>> table, set<char> vars)
         if (!flag)
         {
             cout << "Function is always 1 (True)";
-            function_8("1");
+            Circuit_gen("1");
         }
     }
     else if (!pis.size())
     {
         cout << "Function is always 0 (False)";
-        function_8("0");
+        Circuit_gen("0");
     }
     if(flag)
     {
@@ -179,7 +179,7 @@ void function_3(map<char, vector<int>> table, set<char> vars)
             cout << '\n';
         }
 
-        function_4_5(table, pis, minterms, vars);
+        EPI_gen(table, pis, minterms, vars);
     }
 }
 

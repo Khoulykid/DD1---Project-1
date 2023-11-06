@@ -15,7 +15,7 @@ using namespace std;
 
 int main()
 {
-    function_1();
+    User_input();
 
     return 0;
 }
