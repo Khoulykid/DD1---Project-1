@@ -160,9 +160,14 @@ void function_3(map<char, vector<int>> table, set<char> vars)
         }
         if (!flag)
         {
-            cout << "1";
+            cout << "Function is always 1 (True)";
             function_8("1");
         }
+    }
+    else if (!pis.size())
+    {
+        cout << "Function is always 0 (False)";
+        function_8("0");
     }
     if(flag)
     {
