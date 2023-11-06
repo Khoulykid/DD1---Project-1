@@ -15,7 +15,7 @@ void Circuit_gen(string boolexp)
     int n = boolexp.length();
     string temp("");
     bool x(false);
-    if (boolexp == "1")
+    if (boolexp == "1" || boolexp == "0")
         x = true;
 
     for (int i = 0; i < n; i++)
@@ -117,7 +117,7 @@ void Circuit_gen(string boolexp)
     cout << "Do you wish to display the circuit? yes/no \n";
     cin >> ans;
     if(ans == "yes" || ans == "Yes")
-        std::system("C:/Users/noury/source/repos/DD1proj1/DD1proj1/circuit.html");
+        system("C:/Users/noury/source/repos/DD1proj1/DD1proj1/circuit.html");
 
     
 }

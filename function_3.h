@@ -166,6 +166,7 @@ void PI_gen(map<char, vector<int>> table, set<char> vars)
     }
     else if (!pis.size())
     {
+        flag = false;
         cout << "Function is always 0 (False)";
         Circuit_gen("0");
     }
