@@ -27,14 +27,25 @@ Conflicts faced:
 Test Cases
 
 1-aaa+a' -To make sure that it runs correctly for duplicates
+Minimized function to be outputted : a+a'
 2-a'''+ab -To handle the number ' and accommodate it accordingly
+Minimized function to be outputted : b+a'
 3-(a+b)+(b c) -To make sure it takes either the correct sop or pos format only.
+Minimized function to be outputted : No output since it is invalid
 3-ab'+20 -Only takes valid inputs from users
+Minimized function to be outputted : No output since it is invalid
 4-1001 -Will not accept binary inputs 
+Minimized function to be outputted : No output since it is invalid
 5-(a+b)(c+d') - Validating  Pos
+Minimized function to be outputted : ac+ad'+bc+bd'
 6-c'd+cd'+c'd'+cd - Works even when boolean expression is equal to 1
+Minimized function to be outputted : 1
 7-a'b'c'd'e'f' + ab'c'd'e'f' + a'bc'd'e'f' + abc'd'e'f' + a'b'cd'e'f' + ab'cd'e'f' + a'bcd'e'f' - Works and does not print K-map
+Minimized function to be outputted : c'd'e'f'+b'd'e'f'+a'd'e'f'
 8-abc+bcd' - Normal test
+Minimized function to be outputted : abc+bcd'
 9-a'bc'd'+ab'c'd'+a'bcd'+ab'cd'+abcd'+abc'd'+abcd+abcd'+a'bcd'+abcd -Only EPIS are minimized function
-10-a - Test for logic circuit when it is directly connected with output. 
+Minimized function to be outputted : abc+ad'+bd'
+10-a- Test for logic circuit when it is directly connected with output. 
+Minimized function to be outputted : a
 
